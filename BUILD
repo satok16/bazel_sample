@@ -13,9 +13,19 @@ proto_library(
     deps = ["@protobuf_archive//:descriptor_proto"],
 )
 
+proto_library(
+    name = "sample2_proto",
+    srcs = ["sample0.proto"],
+)
+
 cc_proto_library(
     name = "sample1_proto_cc",
     deps = [":sample1_proto"],
+)
+
+cc_proto_library(
+    name = "sample2_proto_cc",
+    deps = [":sample2_proto"],
 )
 
 cc_binary(
@@ -39,3 +49,12 @@ cc_binary(
     srcs = ["main.cc"],
     deps = [":sample1_proto_cc"],
 )
+
+cc_binary(
+    name = "sample2.so",
+    srcs = [],
+    deps = [":sample2_proto_cc"],
+    linkshared = 1,
+    linkstatic = 1,
+)
+
